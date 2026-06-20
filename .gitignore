@@ -1,6 +1,7 @@
 .vscode.default
 *.cfg
 *.cs
+*.pyc
 Examples
 .idea
 /src/AutoComplete.py

@@ -11,6 +11,10 @@ With some adjustments they might work on other shards too.
 
 ### TazUO remarks
 
+- Mobile's notoriety name:color map
+
+![Mobile notoriety name:color map](docs/mobile-notoriety-name-color-map.png)
+
 - Source files that are not run by the in-game script launcher directly (i.e. _utils.py_) cannot import [API](https://github.com/PlayTazUO/TazUO/blob/main/src/ClassicUO.Client/LegionScripting/docs/API.py).
 
 ### RE-specific
