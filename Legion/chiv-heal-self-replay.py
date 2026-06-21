@@ -1,53 +1,8 @@
-import math
 import API
+import _utils
+from _utils import cast_spell, is_cursed
 
-# Mana costs for each spell (base, before Lower Mana Cost).
-SPELL_MANA_COSTS = {
-    "Cleanse by Fire": 10,
-    "Close Wounds": 10,
-    "Remove Curse": 20,
-}
-
-# All debuffs the chivalry Remove Curse spell can remove.
-REMOVABLE_CURSES = [
-    "Curse",
-    "Clumsy",
-    "Weaken",
-    "Feeblemind",
-    "Paralyze",
-    "Corpse Skin",
-    "Evil Omen",
-    "Mind Rot",
-    "Strangle",
-    "Blood Oath",
-    "Mortal Strike",
-]
-
-
-def cast_spell(spell_name, target):
-    """Check mana, cast spell, acquire target (or skip if None), then wait 1.5 s.
-
-    Returns True if the spell was cast, False if mana was insufficient.
-    """
-    lmc = API.Player.LowerManaCost / 100.0
-    cost = math.ceil(SPELL_MANA_COSTS[spell_name] * (1.0 - lmc))
-    if API.Player.Mana < cost:
-        API.SysMsg(
-            f"Not enough mana for {spell_name} (need {cost}, have {API.Player.Mana}).",
-            33,
-        )
-        return False
-
-    API.CastSpell(spell_name)
-    if target is not None and API.WaitForTarget("Beneficial", 3):
-        API.Target(target)
-    API.Pause(2)
-
-    return True
-
-
-def is_cursed():
-    return any(API.BuffExists(curse) for curse in REMOVABLE_CURSES)
+_utils.init(API)
 
 
 def chiv_heal_loop():

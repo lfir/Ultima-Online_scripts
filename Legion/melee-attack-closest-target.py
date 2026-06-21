@@ -1,4 +1,8 @@
 import API
+import _utils
+from _utils import get_mobs_by
+
+_utils.init(API)
 
 ATTACKABLES = [
     API.Notoriety.Gray,
@@ -7,16 +11,6 @@ ATTACKABLES = [
     API.Notoriety.Murderer,
 ]
 RANGE = 5
-
-
-def get_mobs_by(notorieties, dist):
-    mobs = []
-    for n in notorieties:
-        # For some reason it always returns None if all notorieties are passed in one go
-        inrange = API.NearestMobiles([n], dist)
-        if inrange:
-            mobs.extend(inrange)
-    return mobs
 
 
 def attack_closest():
