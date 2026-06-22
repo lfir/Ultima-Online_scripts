@@ -1,20 +1,37 @@
+import functools
 import math
 
 _api = None
 
 
-def init(api):
+def set_api(api):
     global _api  # required: without this, assignment would create a local variable
     if _api is None:
         _api = api
 
 
+def trap_errors(func):
+    """Decorator: catches unhandled exceptions and reports them via SysMsg."""
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            _api.SysMsg(f"{func.__name__} error: {e}", 33)
+
+    return wrapper
+
+
+CHIV_CLEANSE = "Cleanse by Fire"
+CHIV_CLOSE_WOUNDS = "Close Wounds"
+CHIV_RM_CURSE = "Remove Curse"
+
 # Mana costs for each spell (base, before Lower Mana Cost).
 SPELL_MANA_COSTS = {
-    # Chivalry
-    "Cleanse by Fire": 10,
-    "Close Wounds": 10,
-    "Remove Curse": 20,
+    CHIV_CLEANSE: 10,
+    CHIV_CLOSE_WOUNDS: 10,
+    CHIV_RM_CURSE: 20,
 }
 
 # Spells that require a "Harmful" target cursor.

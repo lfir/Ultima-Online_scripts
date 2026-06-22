@@ -1,8 +1,7 @@
 import API
-import _utils
-from _utils import get_mobs_by
+from _utils import get_mobs_by, set_api, trap_errors
 
-_utils.init(API)
+set_api(API)
 
 ATTACKABLES = [
     API.Notoriety.Gray,
@@ -13,11 +12,12 @@ ATTACKABLES = [
 RANGE = 5
 
 
+@trap_errors
 def attack_closest():
     valid_targets = get_mobs_by(ATTACKABLES, RANGE)
 
     if not valid_targets:
-        API.SysMsg("No valid attackable / hostiles found.", 33)
+        API.SysMsg("No valid attackable / hostiles found.")
         return
 
     valid_targets.sort(key=lambda m: m.Distance)
