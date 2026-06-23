@@ -1,0 +1,16 @@
+import API
+from _utils import cast_spell, set_api, trap_errors, CHIV_JOURNEY
+
+set_api(API)
+
+RUNEBOOK_SERIAL = 1081895304
+
+
+@trap_errors
+def journey_to_bank():
+    API.SysMsg("**Journey to bank** script started.", 52)
+
+    cast_spell(CHIV_JOURNEY, RUNEBOOK_SERIAL)
+
+
+journey_to_bank()

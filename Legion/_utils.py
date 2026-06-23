@@ -26,16 +26,18 @@ def trap_errors(func):
 CHIV_CLEANSE = "Cleanse by Fire"
 CHIV_CLOSE_WOUNDS = "Close Wounds"
 CHIV_RM_CURSE = "Remove Curse"
+CHIV_JOURNEY = "Sacred Journey"
 
 # Mana costs for each spell (base, before Lower Mana Cost).
 SPELL_MANA_COSTS = {
     CHIV_CLEANSE: 10,
     CHIV_CLOSE_WOUNDS: 10,
     CHIV_RM_CURSE: 20,
+    CHIV_JOURNEY: 20,
 }
 
 # Spells that require a "Harmful" target cursor.
-_HARMFUL_SPELLS = set()
+_NEUTRAL_SPELLS = {CHIV_JOURNEY}
 
 # All debuffs the chivalry Remove Curse spell can remove.
 REMOVABLE_CURSES = [
@@ -54,7 +56,7 @@ REMOVABLE_CURSES = [
 
 
 def _cursor_type_for(spell_name):
-    return "Harmful" if spell_name in _HARMFUL_SPELLS else "Beneficial"
+    return "Neutral" if spell_name in _NEUTRAL_SPELLS else "Beneficial"
 
 
 def cast_spell(spell_name, target):
@@ -95,4 +97,5 @@ def get_mobs_by(notorieties, dist):
         inrange = _api.NearestMobiles([n], dist)
         if inrange:
             mobs.extend(inrange)
+
     return mobs
