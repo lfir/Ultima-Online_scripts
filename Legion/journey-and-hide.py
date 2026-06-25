@@ -60,7 +60,7 @@ def journey_and_hide(rune_num, book_serial):
 
     if not API.StopRequested:
         API.UseSkill("Hiding")
-        API.SysMsg("Hide executed.", 66)
+        API.SysMsg("Hide executed.", 52)
 
 
 def parse_rune_names(raw_text):
@@ -170,7 +170,7 @@ else:
         else:
             # 3. Build the persistent custom UI
             ui_gump = build_ui(valid_runes, target_serial)
-            API.SysMsg("Safe Travel UI generated.", 66)
+            API.SysMsg("Safe Travel UI ready.", 52)
 
             # Keep the script alive so the UI buttons function
             while not API.StopRequested and not ui_gump.IsDisposed:
