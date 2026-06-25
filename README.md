@@ -11,6 +11,23 @@ With some adjustments they might work on other shards too.
 
 ### TazUO remarks
 
+- Data dirs
+  - `Launcher/Profiles` - Server definitions
+  - `TazUO/Data` - Account, client, assistant and map configurations
+  - `TazUO/LegionScripts`
+
+- How to get gump id
+
+Record a macro that interacts with the gump and inspect the code, e.g.
+wait for animal lore gump to appear and then close it:
+
+```python
+while not API.HasGump(0x1DDBAB48):
+    API.Pause(0.1)
+API.Pause(1)
+    API.ReplyGump(0, 0x1DDBAB48)
+```
+
 - Mobile's notoriety name:color map
 
 ![Mobile notoriety name:color map](docs/mobile-notoriety-name-color-map.png)
