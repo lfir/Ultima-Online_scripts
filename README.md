@@ -13,8 +13,8 @@ With some adjustments they might work on other shards too.
 
 - Data dirs
   - `Launcher/Profiles` - Server definitions
-  - `TazUO/Data` - Account, client, assistant and map configurations
-  - `TazUO/LegionScripts`
+  - `TazUO/Data` - Account chars, client, assistant and map configurations
+  - `TazUO/LegionScripts` - Scripts; symbolic links to scripts in other locations work too
 
 - How to get gump id
 

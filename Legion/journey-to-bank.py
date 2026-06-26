@@ -8,8 +8,10 @@ RUNEBOOK_SERIAL = 1081895304
 
 @trap_errors
 def journey_to_bank():
-    API.SysMsg("**Journey to bank** script started.", 52)
+    journame = "journey-to-bank:"
+    API.SysMsg(f"{journame} script started", 52)
 
+    API.SysMsg(f"{journame} cast {CHIV_JOURNEY}...", 52)
     cast_spell(CHIV_JOURNEY, RUNEBOOK_SERIAL)
 
 

@@ -36,7 +36,7 @@ SPELL_MANA_COSTS = {
     CHIV_JOURNEY: 20,
 }
 
-# Spells that require a "Harmful" target cursor.
+# Spells that require a "Neutral" target cursor.
 _NEUTRAL_SPELLS = {CHIV_JOURNEY}
 
 # All debuffs the chivalry Remove Curse spell can remove.
@@ -60,7 +60,8 @@ def _cursor_type_for(spell_name):
 
 
 def cast_spell(spell_name, target):
-    """Check mana, cast spell, acquire target (or skip if None), then wait 2 s.
+    """Check mana, cast spell, acquire target (or skip if None), then wait for cr_delay (character-scoped variable)
+    or 2 seconds by default if undefined (recovery time for a char with 0 FCR).
 
     Returns True if the spell was cast, False if mana was insufficient.
     """
@@ -76,7 +77,7 @@ def cast_spell(spell_name, target):
     _api.CastSpell(spell_name)
     if target is not None and _api.WaitForTarget(_cursor_type_for(spell_name), 3):
         _api.Target(target)
-    _api.Pause(2)
+    _api.Pause(int(_api.GetPersistentVar("cr_delay", "2", _api.PersistentVar.Char)))
 
     return True
 
