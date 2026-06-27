@@ -27,6 +27,9 @@ CHIV_CLEANSE = "Cleanse by Fire"
 CHIV_CLOSE_WOUNDS = "Close Wounds"
 CHIV_RM_CURSE = "Remove Curse"
 CHIV_JOURNEY = "Sacred Journey"
+CHIV_CONSECRATE = "Consecrate Weapon"  # spell name for CastSpell()
+CHIV_CONSECRATE_BUFF = "Consecrate"  # buff bar label for BuffExists()
+CHIV_DIVINE = "Divine Fury"
 
 # Mana costs for each spell (base, before Lower Mana Cost).
 SPELL_MANA_COSTS = {
@@ -34,6 +37,8 @@ SPELL_MANA_COSTS = {
     CHIV_CLOSE_WOUNDS: 10,
     CHIV_RM_CURSE: 20,
     CHIV_JOURNEY: 20,
+    CHIV_CONSECRATE: 10,
+    CHIV_DIVINE: 10,
 }
 
 # Spells that require a "Neutral" target cursor.
@@ -75,9 +80,13 @@ def cast_spell(spell_name, target):
         return False
 
     _api.CastSpell(spell_name)
+    # Target / no target pause
     if target is not None and _api.WaitForTarget(_cursor_type_for(spell_name), 3):
         _api.Target(target)
-    _api.Pause(int(_api.GetPersistentVar("cr_delay", "2", _api.PersistentVar.Char)))
+    else:
+        _api.Pause(1)
+    # FCR pause
+    _api.Pause(float(_api.GetPersistentVar("cr_delay", "2", _api.PersistentVar.Char)))
 
     return True
 
