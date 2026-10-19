@@ -23,6 +23,15 @@ def trap_errors(func):
     return wrapper
 
 
+def wait_for_target():
+    """Safely waits up to 3 seconds for the server to provide a target cursor."""
+    timeout_loops = 30
+    while not _api.HasTarget() and timeout_loops > 0 and not _api.StopRequested:
+        _api.Pause(0.1)
+        timeout_loops -= 1
+    return _api.HasTarget()
+
+
 CHIV_CLEANSE = "Cleanse by Fire"
 CHIV_CLOSE_WOUNDS = "Close Wounds"
 CHIV_RM_CURSE = "Remove Curse"
