@@ -34,6 +34,16 @@ API.Pause(1)
 
 - Source files that are not run by the in-game script launcher directly (i.e. _utils.py_) cannot import [API](https://github.com/PlayTazUO/TazUO/blob/main/src/ClassicUO.Client/LegionScripting/docs/API.py).
 
+- In-game message types available
+
+```python
+# 1. System Message (Should print to your lower-left journal)
+API.SysMsg("Test 1: SysMsg is successfully printing to the journal!")
+
+# 2. Character Speech (Character should say this)
+API.Msg("Test 2: Msg is working, my character is speaking!")
+```
+
 ### RE-specific
 
 - Script cwd is C:\ClassicUO\ClassicUO (Wine + ClassicUO root dir in C:\ and RE as plugin).
